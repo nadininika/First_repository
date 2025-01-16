@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.service import Service
 # Укажите путь к ChromeDriver
 driver_path = (
     "C:/Users/nadin/OneDrive/Desktop/first_repository-main/"
-    "05_lesson/chromedriver.exe"
+    "chromedriver/chromedriver.exe"
 )
 
 # Создаём объект Service

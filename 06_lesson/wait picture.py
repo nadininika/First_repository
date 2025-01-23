@@ -1,33 +1,26 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # Инициализация WebDriver
 driver = webdriver.Chrome()
 
 try:
-    # Переход на сайт
-    driver.get(
-        "https://bonigarcia.dev/selenium-webdriver-java/loading-images.html"
-        )
+    # Перейти на сайт
+    driver.get("https://bonigarcia.dev/selenium-webdriver-java/loading-images.html")
 
-    # Установка явного ожидания
-    wait = WebDriverWait(driver, 60)  # Таймаут 60 секунд
+    # Дождаться загрузки всех картинок
+    element = WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "#landscape"))
+    )
 
-    # Ожидание появления всех картинок
-    wait.until(lambda d: len(d.find_elements(By.TAG_NAME, "img")) >= 4)
+    # Получение значения атрибута src у 3-й картинки
+    src = driver.find_element(By.CSS_SELECTOR, "#award").get_attribute("src")
 
-    # Получение всех картинок
-    images = driver.find_elements(By.TAG_NAME, "img")
-
-    # Проверяем полную загрузку каждой картинки
-    for index, image in enumerate(images):
-        wait.until(lambda d: image.get_attribute("naturalWidth") != "0")
-
-    # Получаем значение src у 3-й картинки
-    if len(images) >= 3:
-        third_image_src = images[2].get_attribute("src")
-        print(f"Значение атрибута src у 3-й картинки: {third_image_src}")
+    # Выводим значение в консоль
+    print(src)
 
 finally:
+    # Закрытие браузера
     driver.quit()

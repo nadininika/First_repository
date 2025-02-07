@@ -6,6 +6,7 @@ headers = {
    "Content-Type": "application/json","Authorization": "Bearer --"
 }
 
+
 def test_get_projects():
     response = requests.get(base_url + "/projects", headers=headers)
     assert response.status_code == 200

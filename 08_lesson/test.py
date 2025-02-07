@@ -3,9 +3,8 @@ import requests
 
 base_url = "https://ru.yougile.com/api-v2"
 headers = {
-   "Content-Type": "application/json","Authorization": "--"
+   "Content-Type": "application/json","Authorization": "Bearer --"
 }
-
 
 def test_get_projects():
     response = requests.get(base_url + "/projects", headers=headers)

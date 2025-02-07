@@ -3,7 +3,7 @@ import requests
 
 base_url = "https://ru.yougile.com/api-v2"
 headers = {
-   "Content-Type": "application/json","Authorization": "Bearer --"
+   "Content-Type": "application/json","Authorization": "--"
 }
 
 
@@ -14,23 +14,25 @@ def test_get_projects():
 
 def test_creat_project():
     body = {
-        "title": "Sky pro"
+        "title": "Sky Pro"
     }
     response = requests.post(
         base_url + "/projects", headers=headers, json=body)
     assert response.status_code == 201
 
+    json_response = response.json()
+    assert "id" in json_response
+
 
 def test_change_project():
     body = {
-       "deleted": False,
-       "title": "Sky pro",
+       "title": "Sky Pro",
     }
     response = requests.post(
         base_url + "/projects", headers=headers, json=body)
     body = response.json()
     change_body = {
-        "title": "Home work 8"
+        "title": "HW8"
     }
     response2 = requests.put(
         base_url + '/projects/' + body['id'],
@@ -42,7 +44,7 @@ def test_change_project():
 
 def test_get_id():
     body = {
-       "title": "Sky pro",
+       "title": "HW8",
        }
     response = requests.post(
         base_url + '/projects', headers=headers, json=body)
